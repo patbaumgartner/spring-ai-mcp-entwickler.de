@@ -21,7 +21,8 @@ public class ClientStdio {
 
 		ServerParameters stdioParams = ServerParameters.builder("java")
 			.args("-Dspring.ai.mcp.server.stdio=true", "-Dspring.main.web-application-type=none",
-					"-Dlogging.pattern.console=", "-jar", "target/mcp-server-weather-0.0.1-SNAPSHOT.jar")
+					"-Dlogging.pattern.console=", "-jar",
+					"mcp-server-weather/target/mcp-server-weather-0.0.1-SNAPSHOT.jar")
 			.build();
 
 		StdioClientTransport transport = new StdioClientTransport(stdioParams);
