@@ -4,7 +4,7 @@ import io.modelcontextprotocol.client.McpSyncClient;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
-import org.springframework.ai.chat.memory.InMemoryChatMemory;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +23,9 @@ public class WeatherController {
 				       Other questions are answered with a joke about weather and the topic.
 				       Answer all questions with complete sentences.
 				""")
-			.defaultTools(new SyncMcpToolCallbackProvider(mcpSyncClients))
-			.defaultAdvisors(new MessageChatMemoryAdvisor(new InMemoryChatMemory()), new SimpleLoggerAdvisor())
+			.defaultToolCallbacks(new SyncMcpToolCallbackProvider(mcpSyncClients))
+			.defaultAdvisors(MessageChatMemoryAdvisor.builder(MessageWindowChatMemory.builder().build()).build(),
+					new SimpleLoggerAdvisor())
 			.build();
 	}
 

@@ -4,7 +4,7 @@ import io.modelcontextprotocol.client.McpSyncClient;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
-import org.springframework.ai.chat.memory.InMemoryChatMemory;
+import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.ai.mcp.SyncMcpToolCallbackProvider;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,8 +43,9 @@ public class WeatherController {
 
 							Formuliere deine Antworten klar, schrittweise und in vollständigen Sätzen. Halte sie freundlich, präzise und aufschlussreich.
 							""")
-			.defaultTools(new SyncMcpToolCallbackProvider(mcpSyncClients))
-			.defaultAdvisors(new MessageChatMemoryAdvisor(new InMemoryChatMemory()), new SimpleLoggerAdvisor())
+			.defaultToolCallbacks(new SyncMcpToolCallbackProvider(mcpSyncClients))
+			.defaultAdvisors(MessageChatMemoryAdvisor.builder(MessageWindowChatMemory.builder().build()).build(),
+					new SimpleLoggerAdvisor())
 			.build();
 	}
 
