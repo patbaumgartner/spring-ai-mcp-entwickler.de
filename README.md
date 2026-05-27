@@ -19,3 +19,8 @@ All projects are Spring Boot applications built with Spring AI, showcasing the i
   A Spring Boot server application delivering weather forecast data via the MCP protocol. It supports both STDIO and SSE modes, depending on the selected runtime configuration. Both the SSE and STDIO clients above connect to this server.
 
 Each project resides in its respective subdirectory and demonstrates a unique method of integrating or exposing AI-powered weather services with Spring AI.
+
+
+---
+
+🔗 [patbaumgartner.com](https://patbaumgartner.com) · [More talks & projects on GitHub](https://github.com/patbaumgartner)
